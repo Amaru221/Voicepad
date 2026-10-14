@@ -1,0 +1,38 @@
+# Build output / cached dependencies
+build/
+out/
+cmake-build-*/
+
+# Visual Studio / MSVC
+.vs/
+*.user
+*.suo
+*.VC.db
+*.VC.VC.opendb
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+CMakeUserPresets.json
+_deps/
+
+# Compiled binaries
+*.exe
+*.dll
+*.lib
+*.obj
+*.pdb
+*.ilk
+*.exp
+*.idb
+
+# OS / editor cruft
+Thumbs.db
+Desktop.ini
+.DS_Store
+*.swp
+*~

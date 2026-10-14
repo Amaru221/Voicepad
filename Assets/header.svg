@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460" width="1200" height="460" role="img" aria-label="VoicePad - chica anime con auriculares, tema naranja y verde neon">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0a0e0d"/>
+      <stop offset="1" stop-color="#121917"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.72" cy="0.5" r="0.6">
+      <stop offset="0" stop-color="#ff9a3c" stop-opacity="0.38"/>
+      <stop offset="0.45" stop-color="#ff7a18" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowGreen" cx="0.12" cy="0.85" r="0.55">
+      <stop offset="0" stop-color="#39ff9e" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="hair" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffc06a"/>
+      <stop offset="0.55" stop-color="#ff9a3c"/>
+      <stop offset="1" stop-color="#e8722a"/>
+    </linearGradient>
+    <linearGradient id="hairBack" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e8722a"/>
+      <stop offset="1" stop-color="#b4491b"/>
+    </linearGradient>
+    <linearGradient id="skin" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffe6d0"/>
+      <stop offset="1" stop-color="#f6c9a8"/>
+    </linearGradient>
+    <linearGradient id="jacket" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#22302b"/>
+      <stop offset="1" stop-color="#111917"/>
+    </linearGradient>
+    <radialGradient id="iris" cx="0.5" cy="0.4" r="0.7">
+      <stop offset="0" stop-color="#a8ffd2"/>
+      <stop offset="0.55" stop-color="#39ff9e"/>
+      <stop offset="1" stop-color="#128052"/>
+    </radialGradient>
+    <pattern id="scan" width="4" height="4" patternUnits="userSpaceOnUse">
+      <rect width="4" height="2" fill="#000000" opacity="0.35"/>
+    </pattern>
+  </defs>
+
+  <!-- Backdrop -->
+  <rect width="1200" height="460" fill="url(#bg)"/>
+  <rect width="1200" height="460" fill="url(#glow)"/>
+  <rect width="1200" height="460" fill="url(#glowGreen)"/>
+  <rect width="1200" height="460" fill="url(#scan)" opacity="0.45"/>
+
+  <!-- ============================ ANIME GIRL ============================ -->
+  <g>
+    <!-- hair (back) -->
+    <path d="M 758 250 C 742 108 800 52 880 52 C 960 52 1018 108 1002 250
+             C 1012 332 1002 396 986 448 L 774 448 C 758 396 748 332 758 250 Z"
+          fill="url(#hairBack)"/>
+
+    <!-- neck -->
+    <rect x="854" y="292" width="52" height="72" rx="22" fill="url(#skin)"/>
+
+    <!-- jacket / shoulders -->
+    <path d="M 694 460 C 706 378 788 342 880 342 C 972 342 1054 378 1066 460 Z" fill="url(#jacket)"/>
+    <path d="M 806 356 L 880 430 L 954 356" stroke="#ff9a3c" stroke-width="4" fill="none"
+          opacity="0.7" stroke-linejoin="round"/>
+    <path d="M 838 460 L 880 400 L 922 460" fill="#0c1210"/>
+
+    <!-- ears -->
+    <ellipse cx="788" cy="262" rx="14" ry="22" fill="url(#skin)"/>
+    <ellipse cx="972" cy="262" rx="14" ry="22" fill="url(#skin)"/>
+
+    <!-- face -->
+    <ellipse cx="880" cy="244" rx="88" ry="101" fill="url(#skin)"/>
+
+    <!-- side locks -->
+    <path d="M 792 232 C 778 300 784 364 802 410 L 834 410 C 814 352 808 300 814 240 Z" fill="url(#hair)"/>
+    <path d="M 968 232 C 982 300 976 364 958 410 L 926 410 C 946 352 952 300 946 240 Z" fill="url(#hair)"/>
+
+    <!-- bangs -->
+    <path d="M 792 236 C 796 150 838 106 880 106 C 922 106 964 150 968 236
+             C 946 186 916 168 880 180 C 844 168 814 186 792 236 Z" fill="url(#hair)"/>
+
+    <!-- eyebrows -->
+    <path d="M 824 226 C 838 217 856 217 868 224" stroke="#e8722a" stroke-width="5"
+          fill="none" stroke-linecap="round"/>
+    <path d="M 892 224 C 904 217 922 217 936 226" stroke="#e8722a" stroke-width="5"
+          fill="none" stroke-linecap="round"/>
+
+    <!-- left eye -->
+    <ellipse cx="845" cy="262" rx="22" ry="27" fill="#fdf6ee"/>
+    <ellipse cx="845" cy="265" rx="14" ry="20" fill="url(#iris)"/>
+    <ellipse cx="845" cy="267" rx="6" ry="10" fill="#0a241b"/>
+    <circle cx="839" cy="255" r="5" fill="#ffffff"/>
+    <circle cx="851" cy="274" r="2.6" fill="#ffffff" opacity="0.9"/>
+    <path d="M 823 250 C 835 237 855 237 867 250" stroke="#3a241a" stroke-width="7"
+          fill="none" stroke-linecap="round"/>
+
+    <!-- right eye -->
+    <ellipse cx="915" cy="262" rx="22" ry="27" fill="#fdf6ee"/>
+    <ellipse cx="915" cy="265" rx="14" ry="20" fill="url(#iris)"/>
+    <ellipse cx="915" cy="267" rx="6" ry="10" fill="#0a241b"/>
+    <circle cx="909" cy="255" r="5" fill="#ffffff"/>
+    <circle cx="921" cy="274" r="2.6" fill="#ffffff" opacity="0.9"/>
+    <path d="M 893 250 C 905 237 925 237 937 250" stroke="#3a241a" stroke-width="7"
+          fill="none" stroke-linecap="round"/>
+
+    <!-- nose + mouth -->
+    <path d="M 880 272 q -6 12 5 14" stroke="#e0a582" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M 866 300 q 14 12 28 0" stroke="#c76a5a" stroke-width="4" fill="none" stroke-linecap="round"/>
+
+    <!-- blush -->
+    <ellipse cx="818" cy="290" rx="15" ry="8" fill="#ff9a6b" opacity="0.35"/>
+    <ellipse cx="942" cy="290" rx="15" ry="8" fill="#ff9a6b" opacity="0.35"/>
+
+    <!-- headphones -->
+    <path d="M 780 208 C 786 116 974 116 980 208" stroke="#1b2325" stroke-width="20"
+          fill="none" stroke-linecap="round"/>
+    <path d="M 780 208 C 786 116 974 116 980 208" stroke="url(#hair)" stroke-width="6"
+          fill="none" stroke-linecap="round" opacity="0.95"/>
+    <rect x="746" y="202" width="54" height="96" rx="26" fill="#1b2325" stroke="#ff9a3c" stroke-width="4"/>
+    <rect x="760" y="222" width="26" height="56" rx="13" fill="#0e1413"/>
+    <circle cx="773" cy="250" r="5" fill="#39ff9e"/>
+    <rect x="960" y="202" width="54" height="96" rx="26" fill="#1b2325" stroke="#ff9a3c" stroke-width="4"/>
+    <rect x="974" y="222" width="26" height="56" rx="13" fill="#0e1413"/>
+    <circle cx="987" cy="250" r="5" fill="#39ff9e"/>
+  </g>
+
+  <!-- ============================== TITLE ============================== -->
+  <g font-family="Consolas, 'Courier New', monospace">
+    <text x="80" y="216" font-size="96" font-weight="bold" fill="url(#hair)" letter-spacing="6">VOICEPAD</text>
+    <text x="84" y="266" font-size="26" fill="#39ff9e" letter-spacing="9">VOX-CONTROL CONSOLE</text>
+    <text x="86" y="312" font-size="17" fill="#c99a6a" letter-spacing="3">REAL-TIME VOICE CHANGER &#183; SOUNDBOARD &#183; VB-CABLE</text>
+    <line x1="84" y1="336" x2="470" y2="336" stroke="#ff9a3c" stroke-width="2" opacity="0.6"/>
+  </g>
+
+  <!-- bottom accent -->
+  <rect x="0" y="456" width="1200" height="4" fill="#39ff9e" opacity="0.8"/>
+</svg>
