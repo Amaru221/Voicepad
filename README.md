@@ -2,6 +2,8 @@
 
 <img src="Assets/header.svg" alt="VoicePad — chica anime con auriculares (tema naranja y verde neón)" width="100%">
 
+**Español** &nbsp;·&nbsp; [English](README.en.md)
+
 </div>
 
 # VoicePad — Guía completa de uso
@@ -403,6 +405,7 @@ voice-pad/
   README.md               Esta guía
   Assets/
     icon.png              Icono de la aplicación (exe y barra de tareas)
+    header.svg            Banner mostrado en la cabecera del README
   Tools/
     make_icon.py          Generador del icono
   Source/
@@ -415,6 +418,7 @@ voice-pad/
     Soundboard/           Kit sintetizado + sonidos de usuario + favoritos
     Hotkeys/              Atajos globales (Win32)
     Presets/              Definición de presets
+    Tests/                Auto-pruebas de audio offline (--selftest)
     UI/                   Paneles, LookAndFeel y widgets
     third_party/          signalsmith-stretch (+ signalsmith-linear)
 ```
