@@ -1,6 +1,7 @@
 #include "SelfTest.h"
 
 #include "Common.h"
+#include "Audio/AudioEngine.h"
 #include "Audio/DspChain.h"
 #include "Audio/VoiceParams.h"
 #include "Presets/PresetManager.h"
@@ -373,6 +374,48 @@ int runSelfTests (const juce::File& outputFile)
         }
         r.check (boardEnergy > 0.01, "soundboard audible while gate is closed (energy="
                                          + juce::String (boardEnergy, 4) + ")");
+    }
+
+    // =========================================================================
+    // 3b. Engine buffering: a clip must play in full even when the device block
+    //     size varies (the internal store can be larger than the current block).
+    // =========================================================================
+    r.info ("--- engine buffering (variable block size) ---");
+    {
+        VoiceParams params;
+        DspChain chain (params);
+        Soundboard board;
+        AudioEngine engine (params, chain, board);
+        chain.prepare (sr, block, 2);
+        board.prepare (sr, block);
+        board.buildDefaultKit();
+
+        auto runBlock = [&] (int n, bool capture, long& rendered)
+        {
+            std::vector<float> inL ((size_t) n, 0.0f), inR ((size_t) n, 0.0f);
+            const float* in[2] = { inL.data(), inR.data() };
+            std::vector<float> outL ((size_t) n, 0.0f), outR ((size_t) n, 0.0f);
+            float* out[2] = { outL.data(), outR.data() };
+            juce::AudioIODeviceCallbackContext ctx {};
+            engine.audioDeviceIOCallbackWithContext (in, 2, out, 2, n, ctx);
+            if (capture)
+                rendered += n;
+        };
+
+        long warm = 0;
+        for (int i = 0; i < 4; ++i)
+            runBlock (1024, false, warm);        // grow the internal store to 1024
+
+        board.stopAll();
+        board.trigger (0, 1.0f);                 // LASER = 352 ms
+        long rendered = 0;
+        for (int i = 0; i < 4000 && board.isPlaying (0); ++i)
+            runBlock (256, true, rendered);      // now render in smaller blocks
+
+        const double durMs = (double) rendered * 1000.0 / sr;
+        r.check (std::abs (durMs - 352.0) < 25.0,
+                 "soundboard plays full length through engine (1024 then 256 blocks), dur="
+                     + juce::String (durMs, 1) + " ms");
     }
 
     // =========================================================================

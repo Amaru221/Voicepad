@@ -144,10 +144,18 @@ namespace vp
             if (outputChannelData[c] != nullptr)
                 juce::FloatVectorOperations::clear (outputChannelData[c], numSamples);
 
+        // Keep a backing store large enough, then expose an EXACT-size view so
+        // every stage (voice DSP + soundboard) works on exactly `numSamples`.
+        // Passing the whole store (which can be larger than the current block
+        // after the device changed size) made the soundboard advance its play
+        // position by more than the emitted audio, chopping clips and desyncing
+        // the DSP history.
         if (workBuffer.getNumSamples() < numSamples)
             workBuffer.setSize (2, numSamples, false, false, true);
 
-        workBuffer.clear (0, numSamples);
+        float* channelPtrs[2] = { workBuffer.getWritePointer (0), workBuffer.getWritePointer (1) };
+        juce::AudioBuffer<float> buffer (channelPtrs, 2, numSamples);
+        buffer.clear();
 
         // Input -> working stereo buffer (mono safe).
         for (int c = 0; c < 2; ++c)
@@ -157,32 +165,27 @@ namespace vp
             else if (numInputChannels > 0) src = inputChannelData[0];
 
             if (src != nullptr)
-                workBuffer.copyFrom (c, 0, src, numSamples);
+                buffer.copyFrom (c, 0, src, numSamples);
         }
 
-        const float rawLevel = workBuffer.getRMSLevel (0, 0, numSamples);
+        const float rawLevel = buffer.getRMSLevel (0, 0, numSamples);
         inputLevel.store (rawLevel);
         voiceActive.store (rawLevel > 0.01f);
 
-        dspChain.process (workBuffer);
+        dspChain.process (buffer);
 
-        soundboard.renderInto (workBuffer, params.soundboardGainDb.load());
+        soundboard.renderInto (buffer, params.soundboardGainDb.load());
 
-        outputLevel.store (workBuffer.getRMSLevel (0, 0, numSamples));
+        outputLevel.store (buffer.getRMSLevel (0, 0, numSamples));
 
         // Scope feed (mono downmix).
         if (monoScratch.size() < (size_t) numSamples)
             monoScratch.resize ((size_t) numSamples);
-        if (workBuffer.getNumChannels() >= 2)
         {
-            const auto* l = workBuffer.getReadPointer (0);
-            const auto* r = workBuffer.getReadPointer (1);
+            const auto* l = buffer.getReadPointer (0);
+            const auto* r = buffer.getReadPointer (1);
             for (int i = 0; i < numSamples; ++i)
                 monoScratch[(size_t) i] = 0.5f * (l[i] + r[i]);
-        }
-        else
-        {
-            juce::FloatVectorOperations::copy (monoScratch.data(), workBuffer.getReadPointer (0), numSamples);
         }
         scope.pushBlock (monoScratch.data(), numSamples);
 
@@ -191,7 +194,7 @@ namespace vp
         {
             if (outputChannelData[c] == nullptr)
                 continue;
-            const float* src = workBuffer.getReadPointer (c < 2 ? c : 0);
+            const float* src = buffer.getReadPointer (c < 2 ? c : 0);
             juce::FloatVectorOperations::copy (outputChannelData[c], src, numSamples);
         }
     }
